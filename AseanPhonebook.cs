@@ -50,7 +50,7 @@ class Program
             }
         }
     }
-
+//storing infos to phonebook
     static void StoreToPhonebook()
     {
         do
@@ -86,7 +86,7 @@ class Program
             Console.Write("Do you want to enter another entry [Y/N]? ");
         } while (Console.ReadLine().ToUpper() == "Y");
     }
-
+//To edit the info
     static void EditEntry()
     {
         Console.Write("Enter student number: ");
@@ -151,7 +151,7 @@ class Program
             Console.WriteLine($"Updated information: {student.FirstName} {student.Surname} is a {student.Occupation}. His/Her number is {student.CountryCode}-{student.AreaCode}-{student.PhoneNumber}");
         } while (true);
     }
-
+//To search datas in countries
     static void SearchByCountry()
     {
         List<Student> selectedStudents = new List<Student>();
@@ -186,7 +186,7 @@ class Program
             Console.WriteLine($"{student.Surname}, {student.FirstName}, with student number {student.StudentNumber}, is a {student.Occupation}. His/Her phone number is {student.CountryCode}-{student.AreaCode}-{student.PhoneNumber}\n");
         }
     }
-
+//Country code so it will detect a students or persons info
     static int GetCountryCode(int choice)
     {
         switch (choice)
