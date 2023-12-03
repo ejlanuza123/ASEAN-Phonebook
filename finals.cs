@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+//This is when the we need get and setter to work
 class Student
 {
     public string StudentNumber { get; set; }
@@ -13,7 +13,7 @@ class Student
     public int AreaCode { get; set; }
     public string PhoneNumber { get; set; }
 }
-
+//class program initialize command prompt
 class Program
 {
     static List<Student> phonebook = new List<Student>();
