@@ -181,10 +181,11 @@ class Program
             Console.WriteLine($"Updated information: {student.FirstName} {student.Surname} is a {student.Occupation}. His/Her number is {student.CountryCode}-{student.AreaCode}-{student.PhoneNumber}");
         } while (true);
     }
-//To search datas in countries
+    //To search datas in countries
     static void SearchByCountry()
     {
         List<Student> selectedStudents = new List<Student>();
+        List<string> selectedCountryNames = new List<string>();
 
         do
         {
@@ -192,13 +193,18 @@ class Program
             Console.WriteLine("[1] Philippines [2] Thailand [3] Singapore [4] Indonesia [5] Malaysia [6] ALL [0] No More");
 
             Console.Write("Enter choice: ");
-            int choice = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out int choice))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                continue;
+            }
 
             if (choice == 0)
                 break;
 
             int countryCode = GetCountryCode(choice);
             selectedStudents.AddRange(phonebook.Where(s => s.CountryCode == countryCode));
+            selectedCountryNames.Add(GetCountryName(choice));
         } while (true);
 
         if (selectedStudents.Count == 0)
@@ -209,14 +215,21 @@ class Program
 
         selectedStudents = selectedStudents.OrderBy(s => s.Surname).ToList();
 
-        Console.WriteLine("\nHere are the students:");
+        Console.WriteLine("\nHere are the students in ");
+        for (int i = 0; i < selectedCountryNames.Count; i++)
+        {
+            Console.Write(selectedCountryNames[i]);
+            if (i < selectedCountryNames.Count - 1)
+                Console.Write(", ");
+        }
+        Console.WriteLine(":");
 
         foreach (var student in selectedStudents)
         {
             Console.WriteLine($"{student.Surname}, {student.FirstName}, with student number {student.StudentNumber}, is a {student.Occupation}. His/Her phone number is {student.CountryCode}-{student.AreaCode}-{student.PhoneNumber}\n");
         }
     }
-//Country code so it will detect a students or persons info
+    //Country code so it will detect a students or persons info
     static int GetCountryCode(int choice)
     {
         switch (choice)
@@ -228,6 +241,20 @@ class Program
             case 5: return 60; // Malaysia
             case 6: return 0;  // ALL
             default: return 0;
+        }
+    }
+
+    static string GetCountryName(int choice)
+    {
+        switch (choice)
+        {
+            case 1: return "Philippines";
+            case 2: return "Thailand";
+            case 3: return "Singapore";
+            case 4: return "Indonesia";
+            case 5: return "Malaysia";
+            case 6: return "All";
+            default: return string.Empty;
         }
     }
 }
