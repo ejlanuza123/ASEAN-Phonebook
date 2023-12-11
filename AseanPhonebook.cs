@@ -28,7 +28,12 @@ class Program
             Console.WriteLine("[4] Exit");
 
             Console.Write("Enter choice: ");
-            int choice = int.Parse(Console.ReadLine());
+            int choice;
+            if (!int.TryParse(Console.ReadLine(), out choice))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                continue;
+            }
 
             switch (choice)
             {
@@ -50,7 +55,7 @@ class Program
             }
         }
     }
-//storing infos to phonebook
+
     static void StoreToPhonebook()
     {
         do
@@ -70,13 +75,37 @@ class Program
             student.Occupation = Console.ReadLine();
 
             Console.Write("Enter gender (M for male, F for female): ");
-            student.Gender = char.Parse(Console.ReadLine());
+            if (char.TryParse(Console.ReadLine(), out char gender))
+            {
+                student.Gender = gender;
+            }
+            else
+            {
+                Console.WriteLine("Invalid gender. Please enter 'M' for male or 'F' for female.");
+                continue;
+            }
 
             Console.Write("Enter country code: ");
-            student.CountryCode = int.Parse(Console.ReadLine());
+            if (int.TryParse(Console.ReadLine(), out int countryCode))
+            {
+                student.CountryCode = countryCode;
+            }
+            else
+            {
+                Console.WriteLine("Invalid country code. Please enter a valid number.");
+                continue;
+            }
 
             Console.Write("Enter area code: ");
-            student.AreaCode = int.Parse(Console.ReadLine());
+            if (int.TryParse(Console.ReadLine(), out int areaCode))
+            {
+                student.AreaCode = areaCode;
+            }
+            else
+            {
+                Console.WriteLine("Invalid area code. Please enter a valid number.");
+                continue;
+            }
 
             Console.Write("Enter number: ");
             student.PhoneNumber = Console.ReadLine();
@@ -84,9 +113,10 @@ class Program
             phonebook.Add(student);
 
             Console.Write("Do you want to enter another entry [Y/N]? ");
-        } while (Console.ReadLine().ToUpper() == "Y");
+        } while (Console.ReadLine()?.ToUpper() == "Y");
     }
-//To edit the info
+
+    //To edit the info
     static void EditEntry()
     {
         Console.Write("Enter student number: ");
