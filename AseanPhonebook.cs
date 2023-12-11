@@ -220,7 +220,7 @@ class Program
         {
             Console.Write(selectedCountryNames[i]);
             if (i < selectedCountryNames.Count - 1)
-                Console.Write(", ");
+                Console.Write(" and ");
         }
         Console.WriteLine(":");
 
